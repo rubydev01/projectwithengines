@@ -1,5 +1,6 @@
-PATH
-  remote: ../my_first_gem
+GIT
+  remote: https://github.com/rubydev01/my_first_gem
+  revision: 4261e6dd54b22fca980ff3d1af8753d805b6181b
   specs:
     my_first_gem (0.1.0)
 
