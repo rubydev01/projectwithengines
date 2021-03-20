@@ -4,6 +4,12 @@ GIT
   specs:
     my_first_gem (0.1.0)
 
+PATH
+  remote: engine1
+  specs:
+    engine1 (0.1.0)
+      rails (~> 6.1.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -187,6 +193,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
+  engine1!
   jbuilder (~> 2.7)
   listen (~> 3.3)
   my_first_gem!
