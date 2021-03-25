@@ -3,9 +3,8 @@ module Engine2
     isolate_namespace Engine2
 
     config.generators do |generators|
-      generators.test_framework :rspec
-      generators.fixture_replacement :factory_bot
-      generators.factory_bot dir: 'spec/factories'
+      generators.test_framework :rspec,
+                                view_specs: false
     end
 
     initializer 'engine2.assets.precompile' do |app|

@@ -12,6 +12,5 @@ require 'rails_helper'
 # end
 module Engine2
   RSpec.describe CompaniesHelper, type: :helper do
-    pending "add some examples to (or delete) #{__FILE__}"
   end
 end

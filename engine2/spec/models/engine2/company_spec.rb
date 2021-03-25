@@ -2,6 +2,11 @@ require 'rails_helper'
 
 module Engine2
   RSpec.describe Company, type: :model do
-    pending "add some examples to (or delete) #{__FILE__}"
+    describe 'validations' do
+      it 'is not valid without name' do
+        company = FactoryBot.build(:company, name: nil)
+        expect(company).not_to be_valid
+      end
+    end
   end
 end
