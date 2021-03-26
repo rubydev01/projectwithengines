@@ -48,6 +48,12 @@ $ cp -r spec PATH_TO/engine_name/
 $ rails plugin new engine2 --mountable --dummy-path=spec/dummy --skip-test --skip-git
 ```
 
+## Engine 3 (Third example)
+
+```
+$ rails plugin new engine3 --mountable --dummy-path=spec/dummy --skip-test --databse=postgresql
+```
+
 ## RSpec and FactoryBot initialization
 1. Add this code in the `gemspec` file
 
@@ -89,38 +95,8 @@ $ bundle install
 $ rails g rspec:install
 ```
 
-4. If you tried to do `rspec spec` you are going to see an error:
+4. Run specs to be sure that everything is ok
 
-```
-Failure/Error: require File.expand_path('../config/environment', __dir__)
-LoadError:
-  cannot load such file -- /home/ljimenez/projectwithengines/engine_name/config/environment
-```
-
-So, you need to modify the `rails_helper` file
-```ruby
-# engine_name/spec/rails_helper.rb
-
-# require File.expand_path('../config/environment', __dir__)
-require File.expand_path('../dummy/config/environment', __FILE__)
-```
-
-5. Add `require factory_bot_rails` in the `rails_helper.rb` file
-
-```ruby
-# engine_name/spec/rails_helper.rb
-
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-
-require File.expand_path('dummy/config/environment', __dir__)
-
-require 'rspec/rails'
-
-require 'factory_bot_rails'
-```
-
-6. Run specs to be sure that everything is ok
 ```
 $ rspec spec
 ```
@@ -132,6 +108,9 @@ $ cd my_parent_app/engine_name
 ```
 ```
 $ rails g scaffold Player name:string
+```
+```
+$ rails db:migrate
 ```
 ***The migrations are created inside the engine, but you also need to run the migrations in the pattern app... we are going to see how we can do that in the next section***
 
@@ -181,42 +160,54 @@ OR if you want to run the migration for a specific engine
 $ rails db:migrate SCOPE=engine1 
 ```
 
-#### Run the server
-```
-rails s
-```
-
-Using the first example:
-```
-http://localhost:3000/engine1/players
-```
-
 #### Run the rails console
 ```
 rails c
 ```
+
 Using the first example:
 ```
 > Engine1::Player.all
 ```
 
-## Some error with the assets?
-***Assets not precompiled inside engine***
+## Run the specs of the engine
 
-Add this code in the `engine.rb` file
-
-```ruby
-# engine_name/lib/engine_name/engine.rb
-
-class Engine < ::Rails::Engine
-  ...
-  initializer 'engine_name.assets.precompile' do |app|
-    app.config.assets.precompile << 'engine_name_manifest.js'
-  end
-end
+```
+$ cd my_parent_app/engine_name
 ```
 
-## Run the specs again. Do yo see issues with the routing specs?
+1. If you tried to do `rspec spec` you are going to see an error:
+
+```
+Failure/Error: require File.expand_path('../config/environment', __dir__)
+LoadError:
+  cannot load such file -- /home/ljimenez/projectwithengines/engine_name/config/environment
+```
+
+So, you need to modify the `rails_helper` file
+```ruby
+# engine_name/spec/rails_helper.rb
+
+# require File.expand_path('../config/environment', __dir__)
+require File.expand_path('../dummy/config/environment', __FILE__)
+```
+
+2. Add `require factory_bot_rails` in the `rails_helper.rb` file
+
+```ruby
+# engine_name/spec/rails_helper.rb
+
+require 'spec_helper'
+ENV['RAILS_ENV'] ||= 'test'
+
+require File.expand_path('dummy/config/environment', __dir__)
+
+require 'rspec/rails'
+
+require 'factory_bot_rails'
+```
+
+## Run the specs again in the engine. Do yo see issues with the routing specs?
 ```
 $ rspec spec
 ```
@@ -269,7 +260,35 @@ module Engine2
   end
 end
 ```
-
 ```
 $ rspec spec
+```
+
+#### Run the server
+```
+rails s
+```
+
+Using the first example:
+```
+http://localhost:3000/engine1/players
+```
+
+## Some error with the assets?
+***Assets not precompiled inside engine***
+
+Add this code in the `engine.rb` file
+
+```ruby
+# engine_name/lib/engine_name/engine.rb
+
+class Engine < ::Rails::Engine
+  ...
+  initializer 'engine_name.assets.precompile' do |app|
+    app.config.assets.precompile << 'engine_name_manifest.js'
+  end
+end
+```
+```
+rails s
 ```
