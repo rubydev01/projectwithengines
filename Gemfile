@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'engine1', path: 'engine1'
 gem 'engine2', path: 'engine2'
+gem 'engine3', path: 'engine3'
 gem 'my_first_gem', git: 'https://github.com/rubydev01/my_first_gem'
 
 group :development, :test do
@@ -54,3 +55,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'engine1', path: 'engine1'
 
 gem 'engine2', path: 'engine2'
+
+gem 'engine3', path: 'engine3'

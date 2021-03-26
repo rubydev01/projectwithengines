@@ -16,6 +16,12 @@ PATH
     engine2 (0.1.0)
       rails (~> 6.1.3)
 
+PATH
+  remote: engine3
+  specs:
+    engine3 (0.1.0)
+      rails (~> 6.1.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -201,6 +207,7 @@ DEPENDENCIES
   byebug
   engine1!
   engine2!
+  engine3!
   jbuilder (~> 2.7)
   listen (~> 3.3)
   my_first_gem!
