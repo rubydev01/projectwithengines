@@ -51,7 +51,7 @@ $ rails plugin new engine2 --mountable --dummy-path=spec/dummy --skip-test --ski
 ## Engine 3 (Third example)
 
 ```
-$ rails plugin new engine3 --mountable --dummy-path=spec/dummy --skip-test --databse=postgresql
+$ rails plugin new engine3 --mountable --dummy-path=spec/dummy --skip-test --database=postgresql
 ```
 
 ## RSpec and FactoryBot initialization
@@ -79,6 +79,8 @@ class Engine < ::Rails::Engine
   ...
   config.generators do |generators|
     generators.test_framework :rspec
+    generators.fixture_replacement :factory_bot
+    generators.factory_bot dir: 'spec/factories'
   end
 end
 ```
@@ -192,7 +194,7 @@ So, you need to modify the `rails_helper` file
 require File.expand_path('../dummy/config/environment', __FILE__)
 ```
 
-2. Add `require factory_bot_rails` in the `rails_helper.rb` file
+2. Add `require factory_bot_rails` in the `rails_helper.rb` file and the `FactoryBot::Syntax::Methods` inside the `RSpec.configure`
 
 ```ruby
 # engine_name/spec/rails_helper.rb
@@ -205,6 +207,11 @@ require File.expand_path('dummy/config/environment', __dir__)
 require 'rspec/rails'
 
 require 'factory_bot_rails'
+
+RSpec.configure do |config|
+  ...
+  config.include FactoryBot::Syntax::Methods
+  ...
 ```
 
 ## Run the specs again in the engine. Do yo see issues with the routing specs?
