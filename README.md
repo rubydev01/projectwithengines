@@ -66,6 +66,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'dotenv-rails'
   spec.add_development_dependency 'factory_bot_rails'
+  spec.add_development_dependency 'ffaker'
   spec.add_development_dependency 'rspec-rails'
 end
 ```
