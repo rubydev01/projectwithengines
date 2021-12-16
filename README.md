@@ -75,6 +75,8 @@ end
 ```ruby
 # engine_name/lib/engine_name/engine.rb
 
+require 'dotenv-rails'
+
 class Engine < ::Rails::Engine
   ...
   config.generators do |generators|
@@ -82,6 +84,7 @@ class Engine < ::Rails::Engine
     generators.fixture_replacement :factory_bot
     generators.factory_bot dir: 'spec/factories'
   end
+  Dotenv.load('.env')
 end
 ```
 
