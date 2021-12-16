@@ -196,6 +196,8 @@ So, you need to modify the `rails_helper` file
 
 # require File.expand_path('../config/environment', __dir__)
 require File.expand_path('../dummy/config/environment', __FILE__)
+OR
+require File.expand_path('dummy/config/environment', __dir__)
 ```
 
 2. Add `require factory_bot_rails` in the `rails_helper.rb` file and the `FactoryBot::Syntax::Methods` inside the `RSpec.configure`
